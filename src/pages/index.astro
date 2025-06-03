@@ -1,16 +1,104 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Bio from '../components/Bio.astro';
+import Projects from '../components/Projects.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Friskyy - Engineer & Piercer">
+  <Navigation />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-primary to-secondary opacity-50"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in">
+          <span class="text-accent">Friskyy</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-text-muted mb-8 animate-slide-up">
+          Engineer by day, piercer by obsession.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+          <a href="/projects" class="btn-primary">
+            View Projects
+          </a>
+          <a href="/piercing" class="btn-outline">
+            Piercing Work
+          </a>
+        </div>
+      </div>
+
+      <!-- Background Animation -->
+      <div class="absolute inset-0 -z-10">
+        <canvas id="particleCanvas" class="w-full h-full"></canvas>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <Bio />
+
+    <!-- Projects Section -->
+    <Projects />
+  </main>
+</Layout>
+
+<script>
+  // Particle animation
+  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  
+  if (ctx) {
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    
+    const particles: Array<{
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+    }> = [];
+    
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 2 + 1,
+        speedX: Math.random() * 0.5 - 0.25,
+        speedY: Math.random() * 0.5 - 0.25
+      });
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      
+      particles.forEach(particle => {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        if (particle.x < 0 || particle.x > width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > height) particle.speedY *= -1;
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+  }
+</script>

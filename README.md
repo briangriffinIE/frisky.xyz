@@ -1,4 +1,38 @@
-# Astro Starter Kit: Minimal
+# Friskyy.xyz
+
+Personal website for Brian Griffin (Friskyy) - Senior Software Engineer & Professional Piercer.
+
+## Tech Stack
+
+- [Astro](https://astro.build) - Static Site Generator
+- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+- [GSAP](https://greensock.com/gsap/) - Animation library
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+
+## Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Deployment
+
+This site is deployed to GitHub Pages. The build process is automated through GitHub Actions.
+
+## License
+
+MIT
 
 ```sh
 npm create astro@latest -- --template minimal

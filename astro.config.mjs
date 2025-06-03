@@ -10,5 +10,8 @@ export default defineConfig({
   output: 'static',
   build: {
     assets: '_assets'
+  },
+  vite: {
+    publicDir: 'public'
   }
 });
